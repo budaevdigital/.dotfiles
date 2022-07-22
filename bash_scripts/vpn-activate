@@ -1,0 +1,9 @@
+#!/bin/bash
+isactive=$(sudo wg show | grep -c wg0)
+if sudo wg show | grep -c wg0 2>&1 >/dev/null
+then
+wg-quick down wg0 > /dev/null 2>&1 && echo "VPN Deactivate"
+elif [ $isactive -eq 0 ]
+then
+wg-quick up wg0 > /dev/null 2>&1 && echo "VPN Activate"
+fi
