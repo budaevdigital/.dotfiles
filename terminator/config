@@ -22,7 +22,7 @@
       fullscreen = False
       size = 1920, 1011
       title = Arkalaust@tools:~
-      last_active_term = 2f6e4931-9018-489b-8858-ded754ae3904
+      last_active_term = 17fe7171-0765-4bcf-88fd-edadd2dac2f1
       last_active_window = True
     [[[child1]]]
       type = VPaned
@@ -56,8 +56,8 @@
       type = HPaned
       parent = child1
       order = 1
-      position = 959
-      ratio = 0.5007832898172324
+      position = 958
+      ratio = 0.5002610966057441
     [[[terminal6]]]
       type = Terminal
       parent = child5
@@ -70,6 +70,6 @@
       parent = child5
       order = 1
       profile = default
-      uuid = 77596c33-9f9b-473a-96e4-43f643e578da
+      uuid = 1abe0c87-49f9-4787-8429-fc831c5a610e
       command = cd Documents/Code/Git/Study/
 [plugins]
