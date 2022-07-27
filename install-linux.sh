@@ -20,13 +20,13 @@ fi
 read -e -p "
 Хотите установить настройки для Bashrс? [Y/n] " ISBASHRC
 
+ISBASHRC=$1
+
 if [[ $ISBASHRC == "y" || $ISBASHRC == "Y" || $ISBASHRC == "" ]]; then
     if [[ -f ~/.bashrc ]]; then
 	    rm ~/.bashrc
-        ln -s $DOT_DIR_FILE_HOME/bash/.bashrc ~/.bashrc
-    else
-        ln -s $DOT_DIR_FILE_HOME/bash/.bashrc ~/.bashrc      
     fi
+        ln -s $DOT_DIR_FILE_HOME/bash/.bashrc ~/.bashrc      
 else
     echo 'Bashrс - пропущен'
 fi
