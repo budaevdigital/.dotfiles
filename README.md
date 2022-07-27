@@ -30,8 +30,8 @@ sudo apt-get install wget unzip -y
 Запустите команду в терминале:
 
 ```bash
-wget -q https://raw.githubusercontent.com/budaevdigital/.dotfiles/master/install-linux.sh -O - |\ 
-bash -s -- -Y1 -Y2
+wget -q https://raw.githubusercontent.com/budaevdigital/.dotfiles/master/install-linux.sh -O - | \
+bash -s -- Y1 Y2
 
 ```
 

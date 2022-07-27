@@ -4,6 +4,12 @@ DOT_DIR_FILE_HOME_ZIP=~/.dotfiles-master.zip
 ISBASHRC=$1
 REMOTHERFILES=$2
 
+LINK_IN_BASHRC_FILE=('#.bashrc\n\n
+source '$DOT_DIR_FILE_HOME'/bash/.shells/.defaults\n
+source '$DOT_DIR_FILE_HOME'/bash/.shells/.functions\n
+source '$DOT_DIR_FILE_HOME'/bash/.shells/.alias\n
+source '$DOT_DIR_FILE_HOME'/bash/.shells/.prompt')
+
 if [[ ! -d $DOT_DIR_FILE_HOME ]]; then
     wget https://github.com/budaevdigital/.dotfiles/archive/master.zip -O $DOT_DIR_FILE_HOME_ZIP
     mkdir $DOT_DIR_FILE_HOME
@@ -28,6 +34,7 @@ if [[ $ISBASHRC == "y" || $ISBASHRC == "Y1" || $ISBASHRC == "" ]]; then
     if [[ -f ~/.bashrc ]]; then
 	    rm ~/.bashrc
     fi
+        echo -e $LINK_IN_BASHRC_FILE > $DOT_DIR_FILE_HOME/bash/.bashrc
         ln -s $DOT_DIR_FILE_HOME/bash/.bashrc ~/.bashrc      
 else
     echo 'Bashrс - пропущен'

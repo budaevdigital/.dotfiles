@@ -1,0 +1,6 @@
+#.bashrc
+
+ source /home/Arkalaust/.dotfiles-master/bash/.shells/.defaults
+ source /home/Arkalaust/.dotfiles-master/bash/.shells/.functions
+ source /home/Arkalaust/.dotfiles-master/bash/.shells/.alias
+ source /home/Arkalaust/.dotfiles-master/bash/.shells/.prompt
