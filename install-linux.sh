@@ -23,13 +23,6 @@ else
     rm $DOT_DIR_FILE_HOME_ZIP    
 fi
 
-# Блок с установкой
-# -e  (readline), чтобы разрешить редактирование строки с помощью клавиш со стрелками
-# read -e -p "
-# Хотите установить настройки для Bashrс? [Y/n] " ISBASHRC
-
-
-
 if [[ $ISBASHRC == "y" || $ISBASHRC == "Y1" || $ISBASHRC == "" ]]; then
     if [[ -f ~/.bashrc ]]; then
 	    rm ~/.bashrc
@@ -40,9 +33,6 @@ else
     echo 'Bashrс - пропущен'
 fi
 
-# read -e -p "
-# Удалить ненужные установочные файлы? [Y/n] " REMOTHERFILES
-
 if [[ $REMOTHERFILES == "y" || $REMOTHERFILES == "Y2" || $REMOTHERFILES == "" ]]; then    
     rm -r $DOT_DIR_FILE_HOME/_assets
     rm -r $DOT_DIR_FILE_HOME/terminator
@@ -51,6 +41,5 @@ if [[ $REMOTHERFILES == "y" || $REMOTHERFILES == "Y2" || $REMOTHERFILES == "" ]]
 else
     echo 'Установочные файлы были нетронуты'
 fi
-
 
 echo 'Поздравляем! Всё установлено и готово к использованию!'
