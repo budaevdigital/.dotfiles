@@ -31,7 +31,7 @@ sudo apt-get install wget unzip -y
 
 ```bash
 wget -q https://raw.githubusercontent.com/budaevdigital/.dotfiles/master/install-linux.sh -O - |\ 
-bash -s -- Y1 Y2
+bash -s -- -Y1 -Y2
 
 ```
 
