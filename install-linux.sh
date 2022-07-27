@@ -5,6 +5,7 @@ ISBASHRC=$1
 REMOTHERFILES=$2
 
 LINK_IN_BASHRC_FILE=('#.bashrc\n\n
+source '$DOT_DIR_FILE_HOME'/bash/.shells/.export\n
 source '$DOT_DIR_FILE_HOME'/bash/.shells/.defaults\n
 source '$DOT_DIR_FILE_HOME'/bash/.shells/.functions\n
 source '$DOT_DIR_FILE_HOME'/bash/.shells/.alias\n

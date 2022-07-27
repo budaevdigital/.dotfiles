@@ -12,6 +12,7 @@ function print_ip_adress(){
 }
 
 # Инициализация проекта (каталога и шаблонов гит файлов)
+# Аргументом принимает название директории
 function git_init() {
     if [ -z "$1" ]; then
         printf "%s\n" "Укажите имя директории";
@@ -35,4 +36,20 @@ function see_vpn_is_active() {
 	elif [ $isactive -eq 0 ]; then
 		wg-quick up wg0 > /dev/null 2>&1 && echo "VPN Activate";
 	fi
+}
+
+# URL аккаунтов
+WEBDAV_URL=https://webdav.cloud.mail.ru
+# Пути непосредственного монтирования WebDAV
+WEBDAV_DIR=/mnt/mailcloud/
+
+function mount_webdav() {
+  # Проверяем, существуют ли целевые директории монтирования, и, если нет, создаем их.
+  if [ ! -d "$WEBDAV_DIR" ]; then
+    echo "Создание $WEBDAV_URL"
+    mkdir $WEBDAV_URL
+  fi
+  # Монтируем WebDAV каталоги
+  echo "Монтирование $WEBDAV_URL"
+  mount -t davfs -o rw $WEBDAV_URL $WEBDAV_URL
 }
