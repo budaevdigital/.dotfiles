@@ -5,4 +5,3 @@ source .shells/.defaults
 source .shells/.functions
 source .shells/.alias
 source .shells/.prompt
-source .shells/git
