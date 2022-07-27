@@ -29,7 +29,8 @@ if [[ $ISBASHRC == "y" || $ISBASHRC == "Y1" || $ISBASHRC == "" ]]; then
 	    rm ~/.bashrc
     fi
         echo -e $LINK_IN_BASHRC_FILE > $DOT_DIR_FILE_HOME/bash/.bashrc
-        ln -s $DOT_DIR_FILE_HOME/bash/.bashrc ~/.bashrc      
+        ln -s $DOT_DIR_FILE_HOME/bash/.bashrc ~/.bashrc
+        source ~/.bashrc
 else
     echo 'Bashrс - пропущен'
 fi
