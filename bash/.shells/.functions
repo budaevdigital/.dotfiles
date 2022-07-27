@@ -28,6 +28,7 @@ function git_init() {
 
 function see_vpn_is_active() {
 	# задаём переменную в которой ищем запущен ли wireguard
+  # -c считает количество упоминаний
 	isactive=$(sudo wg show | grep -c wg0);
 	if sudo wg show | grep -c wg0 2>&1 >/dev/null; then
 		# /dev/null 2>&1 - отключает вывод у указанного уровня (2 и 1) вывода в терминал
@@ -55,18 +56,22 @@ function mount_webdav() {
 # $1 - файл (архив) для бэкапа
 # $2 - директорию, куда нужно сохранить бэкап
 function backup_zip_file_on_mailcloud() {
-	if [ -d "$WEBDAV_DIR" ]; then
-		NAME_DIR=$(date +"%m-%d-%Y");
-		FILE_BACKUP=$1;
-		DIR_BACKUP=$2;
-    if [ ! -d "$NAME_DIR" ]; then
-      mkdir $NAME_DIR;
-    else
-      rm -rf $NAME_DIR;
-    fi
-    echo "Переносим $1 в: $2/$NAME_DIR"
-    mv $1 "$2/$NAME_DIR"
-	fi
+  CURRENT_DIR=$(pwd);
+  NAME_DIR=$(date +"%d.%m.%Y");
+  FILE_BACKUP="$1/$2";
+  DIR_BACKUP=$3;  
+  cd $DIR_BACKUP;
+  if [ ! -d "$NAME_DIR" ]; then
+    sudo mkdir $NAME_DIR;
+    echo "Создана новая директория $NAME_DIR";
+  else
+    echo "Переход в директорию $NAME_DIR";
+  fi
+  CLOUD_DIR="$3/$NAME_DIR/";
+  echo "Переносим $FILE_BACKUP в: $NAME_DIR";
+  sudo mv $FILE_BACKUP $CLOUD_DIR;
+  echo "Перенос завершён!";
+  cd $CURRENT_DIR;
 }
 
 function unmount_webdav() {
@@ -74,17 +79,27 @@ function unmount_webdav() {
   echo "Размонтирование $WEBDAV_URL";
   sudo umount $WEBDAV_DIR;
   # После размонтирования, удаляем пустой каталог
-  rm -r $WEBDAV_DIR;
+  # rm -r $WEBDAV_DIR;
   cd ~;
 }
 
+# В первом аргументе передоётся имя файла "obsidian.zip"
+# Во втором аргументе - директория или файл для архивации
 function zip_files(){
-  NAME_ZIP=$1
-  DIR_FOR_ZIP=$2
-  if [ -e "$DIR_FOR_ZIP/$NAME_ZIP.zip" ]; then
-    rm -rf "$DIR_FOR_ZIP/$NAME_ZIP.zip";
+  NAME_ZIP=$1;
+  DIR_FOR_ZIP=$2;
+  CURRENT_DIR=$(pwd);
+  cd $DIR_FOR_ZIP;
+  if [ -e "$NAME_ZIP" ]; then
+    rm $NAME_ZIP;
+    echo "Прошлый архив удалён!"
   fi
-  zip -r "$NAME_ZIP.zip" "$DIR_FOR_ZIP/*";
-  echo "Архив $NAME_ZIP.zip создан!";
-  ll -la | grep $NAME_ZIP;
+  echo "Приступаем к архивации..."
+  zip -r $NAME_ZIP $DIR_FOR_ZIP > /dev/null 2>&1;
+  iscreate=$(ll -la | grep -c $NAME_ZIP);
+  if [ ! $iscreate -eq 0 ]; then
+    echo "Архив $NAME_ZIP создан!";
+    pwd;
+  fi
+  cd $CURRENT_DIR;
 }

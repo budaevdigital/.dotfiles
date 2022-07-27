@@ -19,4 +19,7 @@ alias ginit='git_init'
 alias vpn='see_vpn_is_active'
 alias mnweb='mount_webdav'
 alias unweb='unmount_webdav'
-alias back-obsidian="zip_files obsidian $OBSIDIAN_DIR"
+alias obsidian-backup="mount_webdav && \
+                       zip_files $OBSIDIAN_ZIP $OBSIDIAN_DIR && \
+                       backup_zip_file_on_mailcloud $OBSIDIAN_DIR $OBSIDIAN_ZIP $OBSIDIAN_BACKUP_DIR && \
+                       unmount_webdav"
