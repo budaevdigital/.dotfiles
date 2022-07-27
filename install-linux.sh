@@ -21,7 +21,6 @@ fi
 echo 'Хотите установить настройки для Bashrс? (y-да или n-нет)'
 read ISBASHRC
 if [ $ISBASHRC = 'y' ]
-
 then
     if [ -f ~/.bashrc ]
     then
