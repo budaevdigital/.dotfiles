@@ -2,7 +2,7 @@
 DOT_DIR_FILE_HOME=~/.dotfiles-master
 DOT_DIR_FILE_HOME_ZIP=~/.dotfiles-master.zip
 
-if [ ! -d $DOT_DIR_FILE_HOME ]
+if [[ ! -d $DOT_DIR_FILE_HOME ]]
 then
     wget https://github.com/budaevdigital/.dotfiles/archive/master.zip -O $DOT_DIR_FILE_HOME_ZIP
     mkdir $DOT_DIR_FILE_HOME
@@ -21,9 +21,9 @@ fi
 echo 'Хотите установить настройки для Bashrс? (y-да или n-нет)'
 read ISBASHRC
 
-if [ $ISBASHRC = 'y' ]
+if [[ $ISBASHRC = 'y' ]]
 then
-    if [ -f ~/.bashrc ]
+    if [[ -f ~/.bashrc ]]
     then
 	    rm ~/.bashrc
         ln -s $DOT_DIR_FILE_HOME/bash/.bashrc ~/.bashrc
@@ -37,7 +37,7 @@ fi
 echo 'Удалить ненужные установочные файлы? (y-да или n-нет)'
 read REMOTHERFILES
 
-if [ $REMOTHERFILES = 'y' ]
+if [[ $REMOTHERFILES = 'y' ]]
 then    
     rm -r $DOT_DIR_FILE_HOME/_assets
     rm -r $DOT_DIR_FILE_HOME/terminator
