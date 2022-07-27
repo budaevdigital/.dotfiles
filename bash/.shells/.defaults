@@ -1,0 +1,40 @@
+############## HISTORY OPTIONS ################
+
+# Не помещайте в историю повторяющиеся строки или строки, начинающиеся с пробела.
+HISTCONTROL=ignoreboth
+
+# для настройки длины истории см. HISTSIZE и HISTFILESIZE
+HISTSIZE=2000
+HISTFILESIZE=2000
+
+# Добавьте в файл истории, не перезаписывайте его
+shopt -s histappend
+
+
+############## DEFAULT OPTIONS ################
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+
+unset rc

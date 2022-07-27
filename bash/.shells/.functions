@@ -1,0 +1,38 @@
+############## FUNCTIONS OPTIONS ################
+
+# Показывает список (20 первых) самых больших файлов в каталоге
+function find_largest_files() {
+    du -h -x -s -- * | sort -r -h | head -20;
+}
+
+function print_ip_adress(){
+	# 2>/dev/null - убирает вывод таблицы curl запроса в консоль. Только ip
+	get_ip=$(curl ifconfig.me 2>/dev/null);
+	echo "Мой IP адресс: $get_ip";
+}
+
+# Инициализация проекта (каталога и шаблонов гит файлов)
+function git_init() {
+    if [ -z "$1" ]; then
+        printf "%s\n" "Укажите имя директории";
+    else
+        mkdir "$1";
+        builtin cd "$1";
+        pwd;
+        git init;
+        touch readme.md .gitignore LICENSE;
+        echo "# $(basename $PWD)" >> readme.md
+    fi
+}
+
+function see_vpn_is_active() {
+	# задаём переменную в которой ищем запущен ли wireguard
+	isactive=$(sudo wg show | grep -c wg0);
+	if sudo wg show | grep -c wg0 2>&1 >/dev/null; then
+		# /dev/null 2>&1 - отключает вывод у указанного уровня (2 и 1) вывода в терминал
+		wg-quick down wg0 > /dev/null 2>&1 && echo "VPN Deactivate";
+	# если переменная equal (равна) False
+	elif [ $isactive -eq 0 ]; then
+		wg-quick up wg0 > /dev/null 2>&1 && echo "VPN Activate";
+	fi
+}
