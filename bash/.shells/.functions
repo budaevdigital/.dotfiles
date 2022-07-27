@@ -22,7 +22,7 @@ function git_init() {
         pwd;
         git init;
         touch readme.md .gitignore LICENSE;
-        echo "# $(basename $PWD)" >> readme.md
+        echo "# $(basename $PWD)" >> readme.md;
     fi
 }
 
@@ -38,18 +38,26 @@ function see_vpn_is_active() {
 	fi
 }
 
-# URL аккаунтов
-WEBDAV_URL=https://webdav.cloud.mail.ru
-# Пути непосредственного монтирования WebDAV
-WEBDAV_DIR=/mnt/mailcloud/
-
 function mount_webdav() {
   # Проверяем, существуют ли целевые директории монтирования, и, если нет, создаем их.
   if [ ! -d "$WEBDAV_DIR" ]; then
-    echo "Создание $WEBDAV_URL"
-    mkdir $WEBDAV_URL
+    echo "Создание $WEBDAV_URL";
+    mkdir $WEBDAV_URL;
   fi
   # Монтируем WebDAV каталоги
-  echo "Монтирование $WEBDAV_URL"
-  mount -t davfs -o rw $WEBDAV_URL $WEBDAV_DIR
+  echo "Монтирование $WEBDAV_URL";
+  sudo mount -t davfs -o rw $WEBDAV_URL $WEBDAV_DIR;
+  cd $WEBDAV_DIR;
+  pwd;
+}
+
+# Принимает на вход два аргумента:
+# $1 - файл (архив) для бэкапа
+# $2 - директорию, куда нужно сохранить бэкап
+function backup_zip_file_on_mailcloud() {
+	if [ -d "$WEBDAV_DIR" ]; then
+		NAME_DIR=$(date +"%m-%d-%Y");
+		FILE_BACKUP=$1;
+		DIR_BACKUP=$2;
+	fi
 }

@@ -1,0 +1,4 @@
+# URL аккаунтов
+WEBDAV_URL=https://webdav.cloud.mail.ru
+# Пути непосредственного монтирования WebDAV
+WEBDAV_DIR=/mnt/mailcloud/
