@@ -59,12 +59,32 @@ function backup_zip_file_on_mailcloud() {
 		NAME_DIR=$(date +"%m-%d-%Y");
 		FILE_BACKUP=$1;
 		DIR_BACKUP=$2;
+    if [ ! -d "$NAME_DIR" ]; then
+      mkdir $NAME_DIR;
+    else
+      rm -rf $NAME_DIR;
+    fi
+    echo "Переносим $1 в: $2/$NAME_DIR"
+    mv $1 "$2/$NAME_DIR"
 	fi
 }
 
 function unmount_webdav() {
   # Размонтирование WebDAV
   echo "Размонтирование $WEBDAV_URL";
-  umount $WEBDAV_DIR1
+  sudo umount $WEBDAV_DIR;
+  # После размонтирования, удаляем пустой каталог
+  rm -r $WEBDAV_DIR;
   cd ~;
+}
+
+function zip_files(){
+  NAME_ZIP=$1
+  DIR_FOR_ZIP=$2
+  if [ -e "$DIR_FOR_ZIP/$NAME_ZIP.zip" ]; then
+    rm -rf "$DIR_FOR_ZIP/$NAME_ZIP.zip";
+  fi
+  zip -r "$NAME_ZIP.zip" "$DIR_FOR_ZIP/*";
+  echo "Архив $NAME_ZIP.zip создан!";
+  ll -la | grep $NAME_ZIP;
 }
