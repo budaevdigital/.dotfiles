@@ -20,15 +20,14 @@ fi
 # -e  (readline), чтобы разрешить редактирование строки с помощью клавиш со стрелками
 echo 'Хотите установить настройки для Bashrс? (y-да или n-нет)'
 read ISBASHRC
+
 if [ $ISBASHRC = 'y' ]
 then
     if [ -f ~/.bashrc ]
     then
 	    rm ~/.bashrc
-        cp $DOT_DIR_FILE_HOME/bash/.bashrc
         ln -s $DOT_DIR_FILE_HOME/bash/.bashrc ~/.bashrc
     else
-        cp $DOT_DIR_FILE_HOME/bash/.bashrc
         ln -s $DOT_DIR_FILE_HOME/bash/.bashrc ~/.bashrc      
     fi
 else
