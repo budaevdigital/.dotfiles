@@ -24,7 +24,7 @@ fi
 
 
 
-if [[ $ISBASHRC == "y" || $ISBASHRC == "Y" || $ISBASHRC == "" ]]; then
+if [[ $ISBASHRC == "y" || $ISBASHRC == "Y1" || $ISBASHRC == "" ]]; then
     if [[ -f ~/.bashrc ]]; then
 	    rm ~/.bashrc
     fi
@@ -36,7 +36,7 @@ fi
 # read -e -p "
 # Удалить ненужные установочные файлы? [Y/n] " REMOTHERFILES
 
-if [[ $REMOTHERFILES == "y" || $REMOTHERFILES == "Y" || $REMOTHERFILES == "" ]]; then    
+if [[ $REMOTHERFILES == "y" || $REMOTHERFILES == "Y2" || $REMOTHERFILES == "" ]]; then    
     rm -r $DOT_DIR_FILE_HOME/_assets
     rm -r $DOT_DIR_FILE_HOME/terminator
     rm $DOT_DIR_FILE_HOME/install-linux.sh

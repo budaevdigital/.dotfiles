@@ -30,6 +30,12 @@ sudo apt-get install wget unzip -y
 Запустите команду в терминале:
 
 ```bash
-wget -q https://raw.githubusercontent.com/budaevdigital/.dotfiles/master/install-linux.sh -O - | bash -s -- NO
+wget -q https://raw.githubusercontent.com/budaevdigital/.dotfiles/master/install-linux.sh -O - |\ bash -s -- Y1 Y2
 
 ```
+
+Замените нужный агрумент на `N` в консоли, если не нужен данный функционал:
+
+- Y1 = Заменяет/Удаляет ваш `.bashrс` файл на скачанный (По-умолчанию: да)
+
+- Y2 = Удаляет скачанные ненужные файлы после установки
