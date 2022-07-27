@@ -61,3 +61,10 @@ function backup_zip_file_on_mailcloud() {
 		DIR_BACKUP=$2;
 	fi
 }
+
+function unmount_webdav() {
+  # Размонтирование WebDAV
+  echo "Размонтирование $WEBDAV_URL";
+  umount $WEBDAV_DIR1
+  cd ~;
+}
