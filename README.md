@@ -13,3 +13,23 @@
 ```bash
 ln -s ~/.dotfiles/terminator/config ~/.config/terminator/config
 ```
+
+## Быстрая Установка
+
+###  Устанавливаем нужные зависимости, если их нет (wget unzip)
+
+```bash
+# для Fedora Linux
+sudo dnf install wget unzip -y
+
+# для Ubuntu/Debian Linux
+sudo apt-get install wget unzip -y
+```
+
+
+Запустите команду в терминале:
+
+```bash
+wget -q https://raw.githubusercontent.com/budaevdigital/.dotfiles/master/install-linux.sh -O - | bash
+
+```
