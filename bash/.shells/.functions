@@ -51,5 +51,5 @@ function mount_webdav() {
   fi
   # Монтируем WebDAV каталоги
   echo "Монтирование $WEBDAV_URL"
-  mount -t davfs -o rw $WEBDAV_URL $WEBDAV_URL
+  mount -t davfs -o rw $WEBDAV_URL $WEBDAV_DIR
 }
