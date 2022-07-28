@@ -6,6 +6,8 @@
 
 ![Bash Promt](_assets/bash-start.png)
 
+![Bash Promt](_assets/Screencast.webm)
+
 Объяснение что где...
 ```text
 [time][username@host]> git-branch ~/directories

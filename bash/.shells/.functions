@@ -1,22 +1,53 @@
 ############## FUNCTIONS OPTIONS ################
 
+function _virtualenv_prompt() {
+    if [[ $VIRTUAL_ENV != "" ]]
+    then
+        echo ${dimefct}"["${txtgre}"${VIRTUAL_ENV##*/}"${dimefct}"]"
+    else
+        echo ""
+    fi
+}
+
 # Переопределяем команду cd и добавляем автоактивацию venv
 function cd() {
   builtin cd "$@"
   if [[ -z "$VIRTUAL_ENV" ]] ; then
-      # Если папка venv найдена, активирует vitualenv
-      if [[ -d ./venv ]] ; then
-        source ./venv/bin/activate
-      fi
+    # Если папка venv найдена, активирует vitualenv
+    if [[ -d ./venv ]] ; then
+      source ./venv/bin/activate
+    fi
   else
-      # проверяет, принадлежит ли текущая папка более ранней папке VIRTUAL_ENV
-      # если да, то ничего не делайте
-      # или деактивировать
-      parentdir="$(dirname "$VIRTUAL_ENV")"
-      if [[ "$PWD"/ != "$parentdir"/* ]] ; then
-        deactivate
-      fi
+    # проверяет, принадлежит ли текущая папка более ранней папке VIRTUAL_ENV
+    # если да, то ничего не делайте
+    # или деактивировать
+    parentdir="$(dirname "$VIRTUAL_ENV")"
+    if [[ "$PWD"/ != "$parentdir"/* ]] ; then
+      deactivate
+    fi
   fi
+}
+
+# «Безопасная» версия __git_ps1, позволяющая избежать ошибок в системах, в которых ее нет.
+function git_branche {
+  command -v __git_ps1 > /dev/null && __git_ps1 " (%s)"
+}
+
+# Change up a variable number of directories
+# E.g:
+#   cu   -> cd ../
+#   cu 2 -> cd ../../
+#   cu 3 -> cd ../../../
+function cu {
+    local count=$1
+    if [ -z "${count}" ]; then
+        count=1
+    fi
+    local path=""
+    for i in $(seq 1 ${count}); do
+        path="${path}../"
+    done
+    cd $path
 }
 
 # Показывает список (20 первых) самых больших файлов в каталоге
