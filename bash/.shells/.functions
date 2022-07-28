@@ -4,9 +4,9 @@
 function cd() {
   builtin cd "$@"
   if [[ -z "$VIRTUAL_ENV" ]] ; then
-      # Если папка env найдена, активирует vitualenv
-      if [[ -d ./.env ]] ; then
-        source ./.env/bin/activate
+      # Если папка venv найдена, активирует vitualenv
+      if [[ -d ./.venv ]] ; then
+        source ./.venv/bin/activate
       fi
   else
       # проверяет, принадлежит ли текущая папка более ранней папке VIRTUAL_ENV
