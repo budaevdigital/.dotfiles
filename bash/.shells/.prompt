@@ -1,18 +1,31 @@
 ############## PROMPT OPTIONS ################
-
-# Элементы
-histnumb='\!' # Показывает номер команды в истории
-startpromt='\$' # Начальная строка ввода команды
-git='\$(git_branche)' # Показывает ветку в гит. Старое: (git branch 2>/dev/null | grep '"'"'^*'"'"' | colrm 1 2)
-timeprompt='\A' # Без секунд
-shrthostname='\u' # Хостнейм без .
-
+# 
+# Некоторые удобные параметры командной строки tput следующие
+# tput bold – Bold effect
+# tput rev – Display inverse colors
+# tput sgr0 – Reset everything
+# tput setaf {CODE} – Set foreground color, see color {CODE} table below for more information
+# tput setab {CODE} – Set background color, see color {CODE} table below for more information
+# 
+# 0 – Black; 1 – Red; 2 – Green; 3 – Yellow; 4 – Blue; 5 – Magenta; 6 – Cyan; 7 – White
+# 
+# Example: LightGreyBG="$(tput setab 7)"
 
 # Эффекты
-dimefct='\[\e[0;2m\]' # Приглушенный стандартный цвет
-blincefct='\[\e[0;5m\]' # Мигание
+dimefct='\[\e[0;2m\]' # Standart - Muted
+blinfct='\[\e[0;5m\]' # Blink
 
 # Цвета
+
+# Избранные
+txtpch='\[\e[0;1;38;5;210m\]' # Peach - Bold
+txtvio='\[\e[0;2;38;5;98m\]' # Dark Violet - Muted
+txteme='\[\e[0;38;5;37m\]' # Emerald
+txttox='\[\e[0;38;5;41m\]' # Toxic
+txtcre='\[\e[0;1;2;97m\]' #  Cream - Bold
+txtpic='\[\e[0;1;38;5;205m\]' # Pink - Bold
+
+# Остальные
 txtblk='\[\e[0;30m\]' # Black - Regular
 txtred='\[\e[0;31m\]' # Red
 txtgrn='\[\e[0;32m\]' # Green
@@ -47,43 +60,57 @@ bakcyn='\[\e[46m\]'   # Cyan
 bakwht='\[\e[47m\]'   # White
 txtrst='\[\e[0m\]'    # Text Reset
 
-# Prompt цвета
-atC="${txtpur}"
-nameC="${txtpur}"
-hostC="${txtpur}"
-pathC="${txtgrn}"
-gitC="${txtpur}"
-pointerC="${txtgrn}"
-normalC="${txtwht}"
+# Prompt Элементы
+histnumb='\!' # Показывает номер команды в истории
+comdnumd='\#' # Показывает номер команды в терминале
+startprt='\$' # Начальная строка ввода команды
+gitsbrch='$(git_branche)' # Показывает ветку в гит. Старое: (git branch 2>/dev/null | grep '"'"'^*'"'"' | colrm 1 2)
+timeshrt='\A' # Время без секунд
+username='\u'
+hostshrt='\h' # Хостнейм без .
+workdirc='\w' # Список всех директорий
+newsline='\n' # Новая строка
+pointprt='▶'
+curntdir='\W' # Показывает текущюю директорию
+
+# Other Prompt Elements
+# \v # bash version
+# \l # terminal 
+# \s # name shell
+# \a # bell 
+# \r # carriage return
+# $? # exit status
+# $('sample') # start 'sample' comand
+# $(ip route get 1.1.1.1 | awk -F"src " '"'"'NR==1{split($2,a," ");print a[1]}'"'"') # ip address
+
+
+# Prompt Block
+timeC="${dimefct}[${dimefct}${timeshrt}${dimefct}]"
+userC="${dimefct}[${dimefct}${username}${dimefct}@${dimefct}${hostshrt}${dimefct}]${dimefct}>"
+gitbC="${txtpch}${gitsbrch}"
+wdirC="${txteme}${workdirc}"
+hisnC="${txtvio}${histnumb}"
+crntC="${dimefct}.${dimefct}/"
+crdrC="${txtcre}${curntdir}"
+pontC="${dimefct}${pointprt}"
+strtC="${txttox}${startprt}"
+
 
 # Красный цвет пользователя для root
 if [ "${UID}" -eq "0" ]; then 
-  nameC="${txtred}" 
+  nameC="${txtpic}" 
 fi
 
 # Формируем кастомную строку
-export PS1="${nameC}\u${atC}@${hostC}\h:${pathC}\w${gitC}\$(git_branche)${pointerC}▶${normalC} "
-
+export PS1="${timeC} ${userC} ${gitbC} ${wdirC}${newsline}${hisnC} ${crntC}${crdrC}${pontC}${strtC} "
 
 # «Безопасная» версия __git_ps1, позволяющая избежать ошибок в системах, в которых ее нет.
 function git_branche {
-  
   command -v __git_ps1 > /dev/null && __git_ps1 | colrm 1 2" (%s)"
 }
 
 # сокращать путь к текущему каталогу в строке терминала
 export PROMPT_DIRTRIM=5
-
-# PS1='\[\e[0;2m\][\[\e[0;2m\]\u\[\e[0;2m\]@\[\e[0;2m\]\h\[\e[0;2m\]]\[\e[0;2m\]> 
-# \[\e[0;1;38;5;210m\]$(git branch 2>/dev/null | grep '"'"'^*'"'"' | colrm 1 2) 
-# \[\e[0;38;5;37m\]\w\n\[\e[0;2;38;5;98m\]\! \[\e[0;2m\].\[\e[0;2m\]/\[\e[0;1;2;97m\]\W\[\e[0;2m\]>\[\e[0;38;5;41m\]\$ \[\e[0m\]'
-
-
-
-
-
-
-
 
 # Change up a variable number of directories
 # E.g:
@@ -101,7 +128,6 @@ function cu {
     done
     cd $path
 }
-
 
 # Open all modified files in vim tabs
 function vimod {
@@ -132,4 +158,3 @@ function virev {
     fi
     vim -p ${toOpen}
 }
-
