@@ -65,6 +65,7 @@ txtrst='\[\e[0m\]'    # Text Reset
 histnumb='\!' # Показывает номер команды в истории
 comdnumd='\#' # Показывает номер команды в терминале
 startprt='\$' # Начальная строка ввода команды
+gitfirst='$(git branch 2>/dev/null | grep '"'"'^*'"'"' | colrm 1 2)'
 gitsbrch='$(git_branche)' # Показывает ветку в гит. Старое: (git branch 2>/dev/null | grep '"'"'^*'"'"' | colrm 1 2)
 timeshrt='\A' # Время без секунд
 username='\u'
@@ -88,7 +89,7 @@ curntdir='\W' # Показывает текущюю директорию
 # Prompt Block
 timeC="${dimefct}[${dimefct}${timeshrt}${dimefct}]"
 userC="${dimefct}[${dimefct}${username}${dimefct}@${dimefct}${hostshrt}${dimefct}]${dimefct}>"
-gitbC="${txtpch}${gitsbrch}"
+gitbC="${txtpch}${gitfirst}"
 wdirC="${txteme}${workdirc}"
 hisnC="${txtvio}${histnumb}"
 crntC="${dimefct}.${dimefct}/"
@@ -103,7 +104,7 @@ if [ "${UID}" -eq "0" ]; then
 fi
 
 # Формируем кастомную строку
-export PS1="${timeC} ${userC} ${gitbC} ${wdirC}${newsline}${hisnC} ${crntC}${crdrC}${pontC} ${strtC} ${txtend}"
+export PS1="${timeC}${userC} ${gitbC} ${wdirC}${newsline}${hisnC} ${crntC}${crdrC}${pontC} ${strtC} ${txtend}"
 
 # «Безопасная» версия __git_ps1, позволяющая избежать ошибок в системах, в которых ее нет.
 function git_branche {
