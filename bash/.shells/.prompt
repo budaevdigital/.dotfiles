@@ -24,7 +24,7 @@ txteme='\[\e[0;38;5;37m\]' # Emerald
 txttox='\[\e[0;38;5;41m\]' # Toxic
 txtcre='\[\e[0;1;2;97m\]' #  Cream - Bold
 txtpic='\[\e[0;1;38;5;205m\]' # Pink - Bold
-txtend='\[\e[0;38;5;231m\]' # Best White
+txtend='\[\e[0;38;5;255m\]' # Best White
 
 # Остальные
 txtblk='\[\e[0;30m\]' # Black - Regular
