@@ -1,8 +1,5 @@
 # .bashrc
-DOT_DIR_FILE_HOME=~/.dotfiles-master
-
-# Основные функции разделены по файлам
-source $DOT_DIR_FILE_HOME/bash/.shells/.defaults
-source $DOT_DIR_FILE_HOME/bash/.shells/.functions
-source $DOT_DIR_FILE_HOME/bash/.shells/.alias
-source $DOT_DIR_FILE_HOME/bash/.shells/.prompt
+source ~/.dotfiles/bash/.shells/.defaults
+source ~/.dotfiles/bash/.shells/.functions
+source ~/.dotfiles/bash/.shells/.alias
+source ~/.dotfiles/bash/.shells/.prompt
