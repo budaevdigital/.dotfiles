@@ -4,9 +4,7 @@
 
 Пример того, как выглядит строка сейчас:
 
-![Bash Promt](_assets/bash-start.png)
-
-![Bash Promt](_assets/Screencast.webm)
+![Bash Promt](_assets/screencast.gif)
 
 Объяснение что где...
 ```text
