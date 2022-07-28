@@ -1,5 +1,24 @@
 ############## FUNCTIONS OPTIONS ################
 
+# Переопределяем команду cd и добавляем автоактивацию venv
+function cd() {
+  builtin cd "$@"
+  if [[ -z "$VIRTUAL_ENV" ]] ; then
+      # Если папка env найдена, активирует vitualenv
+      if [[ -d ./.env ]] ; then
+        source ./.env/bin/activate
+      fi
+  else
+      # проверяет, принадлежит ли текущая папка более ранней папке VIRTUAL_ENV
+      # если да, то ничего не делайте
+      # или деактивировать
+      parentdir="$(dirname "$VIRTUAL_ENV")"
+      if [[ "$PWD"/ != "$parentdir"/* ]] ; then
+        deactivate
+      fi
+  fi
+}
+
 # Показывает список (20 первых) самых больших файлов в каталоге
 function find_largest_files() {
     du -h -x -s -- * | sort -r -h | head -20;
