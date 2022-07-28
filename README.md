@@ -6,9 +6,11 @@
 
 ![Bash Promt](_assets/bash-start.png)
 
-Объяснения что где...
+Объяснение что где...
+```text
 [time][username@host]> git-branch ~/directories
 [number in history] ~/current-directory $(start prompt)
+```
 
 Файл bashrc построен таким образом, что вы самостоятельно сможете кастомизировать строку под себя. См. `bash/.shell/.prompt'
 
