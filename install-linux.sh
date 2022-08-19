@@ -1,6 +1,6 @@
 #!/bin/bash
-DOT_DIR_FILE_HOME=~/.dotfiles
-DOT_DIR_FILE_HOME_ZIP=~/.dotfiles.zip
+DOT_DIR_FILE_HOME=~/.dotfiles-master
+DOT_DIR_FILE_HOME_ZIP=~/.dotfiles-master.zip
 ISBASHRC=$1
 REMOTHERFILES=$2
 
