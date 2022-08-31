@@ -116,8 +116,8 @@ function extract () {
 function mount_webdav() {
   # Проверяем, существуют ли целевые директории монтирования, и, если нет, создаем их.
   if [ ! -d "$WEBDAV_DIR" ]; then
-    echo "Создание $WEBDAV_DIR";
-    mkdir $WEBDAV_DIR;
+    echo "Создание директории $WEBDAV_DIR";
+    sudo mkdir $WEBDAV_DIR;
   fi
   # Монтируем WebDAV каталоги
   echo "Монтирование $WEBDAV_URL";
