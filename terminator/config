@@ -1,7 +1,6 @@
-global_config]
-  tab_position = hidden
-  scroll_tabbar = True
-  homogeneous_tabbar = False
+[global_config]
+  title_transmit_bg_color = "#613583"
+  title_font = Sans Bold 12
   title_transmit_bg_color = "#613583"
   title_receive_bg_color = "#d3e2e7"
   suppress_multiple_term_dialog = True
@@ -9,14 +8,13 @@ global_config]
 [profiles]
   [[default]]
     background_color = "#241f31"
-    background_darkness = 0.9
+    background_darkness = 0.85
     background_type = transparent
     cursor_color = "#aaaaaa"
-    font = Monospace 12
-    foreground_color = "#d0cfcc"
-    palette = "#073642:#dc322f:#859900:#c4a000:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#c>
+    font = Source Code Pro Medium 14
+    foreground_color = "#f6f5f4"
     use_system_font = False
-    bold_is_bright = True
+    bold_is_bright = True    
 [layouts]
   [[default]]
     [[[window0]]]
