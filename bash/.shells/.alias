@@ -1,9 +1,5 @@
 ############## ALIAS OPTIONS ################
 
-# Рабочие директории
-alias study='cd ~/Documents/Code/Git/Study/'
-alias study-api='cd ~/Documents/Code/Git/Study/Yandex/Module_7/02_API/api_yamdb'
-
 alias h='history'
 alias c='clear'
 
@@ -16,14 +12,3 @@ alias ....='cd ../../..;pwd'
 alias findlarge='find_largest_files'
 alias myip='print_ip_adress'
 alias ginit='git_init'
-alias vpn='see_vpn_is_active'
-alias mnweb='mount_webdav'
-alias unweb='unmount_webdav'
-alias obsidian-backup="mount_webdav && zip_files $OBSIDIAN_ZIP $OBSIDIAN_DIR && backup_zip_file_on_mailcloud $OBSIDIAN_DIR $OBSIDIAN_ZIP $OBSIDIAN_BACKUP_DIR"
-
-# Для быстрого запуска Flatpak приложений
-# alias code='flatpak run com.visualstudio.code'
-alias postman='com.getpostman.Postman'
-alias wireshark='org.wireshark.Wireshark'
-alias telegram='org.telegram.desktop'
-# alias obsidian='md.obsidian.Obsidian'

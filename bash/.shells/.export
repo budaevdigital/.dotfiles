@@ -6,7 +6,3 @@
 WEBDAV_URL=https://webdav.cloud.mail.ru
 # Пути непосредственного монтирования WebDAV
 WEBDAV_DIR=/mnt/mailcloud/
-
-OBSIDIAN_ZIP=obsidian.zip
-OBSIDIAN_DIR=/mnt/projects/Note/Obsidian
-OBSIDIAN_BACKUP_DIR=/mnt/mailcloud/Backup_Obsidian

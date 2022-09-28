@@ -1,14 +1,6 @@
 ############## FUNCTIONS OPTIONS ################
 
-function _virtualenv_prompt() {
-    if [[ $VIRTUAL_ENV != "" ]]
-    then
-        echo ${dimefct}"["${txtgre}"${VIRTUAL_ENV##*/}"${dimefct}"]"
-    else
-        echo ""
-    fi
-}
-
+# Must Have для Питонистов
 # Переопределяем команду cd и добавляем автоактивацию venv
 function cd() {
   builtin cd "$@"
@@ -28,13 +20,7 @@ function cd() {
   fi
 }
 
-# «Безопасная» версия __git_ps1, позволяющая избежать ошибок в системах, в которых ее нет.
-function git_branche {
-  command -v __git_ps1 > /dev/null && __git_ps1 " (%s)"
-}
-
-# Change up a variable number of directories
-# E.g:
+# Если нужно опуститься в директории. Удобно! 
 #   cu   -> cd ../
 #   cu 2 -> cd ../../
 #   cu 3 -> cd ../../../
@@ -76,19 +62,6 @@ function git_init() {
     fi
 }
 
-function see_vpn_is_active() {
-	# задаём переменную в которой ищем запущен ли wireguard
-  # -c считает количество упоминаний
-	isactive=$(sudo wg show | grep -c wg0);
-	if sudo wg show | grep -c wg0 2>&1 >/dev/null; then
-		# /dev/null 2>&1 - отключает вывод у указанного уровня (2 и 1) вывода в терминал
-		wg-quick down wg0 > /dev/null 2>&1 && echo "VPN Deactivate";
-	# если переменная equal (равна) False
-	elif [ $isactive -eq 0 ]; then
-		wg-quick up wg0 > /dev/null 2>&1 && echo "VPN Activate";
-	fi
-}
-
 # Функция разархивации, автоматически определяющая нужную команду
 # из переданного названия файла в качестве аргумента
 function extract () {
@@ -110,70 +83,4 @@ function extract () {
   else
       echo "'$1' не верный файл!"
   fi
-}
-
-
-function mount_webdav() {
-  # Проверяем, существуют ли целевые директории монтирования, и, если нет, создаем их.
-  if [ ! -d "$WEBDAV_DIR" ]; then
-    echo "Создание директории $WEBDAV_DIR";
-    sudo mkdir $WEBDAV_DIR;
-  fi
-  # Монтируем WebDAV каталоги
-  echo "Монтирование $WEBDAV_URL";
-  sudo mount -t davfs -o rw $WEBDAV_URL $WEBDAV_DIR;
-  cd $WEBDAV_DIR;
-  pwd;
-}
-
-# Принимает на вход два аргумента:
-# $1 - файл (архив) для бэкапа
-# $2 - директорию, куда нужно сохранить бэкап
-function backup_zip_file_on_mailcloud() {
-  CURRENT_DIR=$(pwd);
-  NAME_DIR=$(date +"%d.%m.%Y");
-  FILE_BACKUP="$1/$2";
-  DIR_BACKUP=$3;  
-  cd $DIR_BACKUP;
-  if [ ! -d "$NAME_DIR" ]; then
-    sudo mkdir $NAME_DIR;
-    echo "Создана новая директория $NAME_DIR";
-  else
-    echo "Переход в директорию $NAME_DIR";
-  fi
-  CLOUD_DIR="$3/$NAME_DIR/";
-  echo "Переносим $FILE_BACKUP в: $NAME_DIR";
-  sudo mv $FILE_BACKUP $CLOUD_DIR;
-  echo "Перенос завершён!";
-  cd $CURRENT_DIR;
-}
-
-function unmount_webdav() {
-  # Размонтирование WebDAV
-  echo "Размонтирование $WEBDAV_URL";
-  sudo umount $WEBDAV_DIR;
-  # После размонтирования, удаляем пустой каталог
-  # rm -r $WEBDAV_DIR;
-  cd ~;
-}
-
-# В первом аргументе передоётся имя файла "obsidian.zip"
-# Во втором аргументе - директория или файл для архивации
-function zip_files(){
-  NAME_ZIP=$1;
-  DIR_FOR_ZIP=$2;
-  CURRENT_DIR=$(pwd);
-  cd $DIR_FOR_ZIP;
-  if [ -e "$NAME_ZIP" ]; then
-    rm $NAME_ZIP;
-    echo "Прошлый архив удалён!"
-  fi
-  echo "Приступаем к архивации..."
-  zip -r $NAME_ZIP $DIR_FOR_ZIP > /dev/null 2>&1;
-  iscreate=$(ll -la | grep -c $NAME_ZIP);
-  if [ ! $iscreate -eq 0 ]; then
-    echo "Архив $NAME_ZIP создан!";
-    pwd;
-  fi
-  cd $CURRENT_DIR;
 }

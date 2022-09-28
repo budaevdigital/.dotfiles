@@ -50,7 +50,7 @@ curntdir='\W' # Показывает текущюю директорию
 # $('sample') # start 'sample' comand
 # $(ip route get 1.1.1.1 | awk -F"src " '"'"'NR==1{split($2,a," ");print a[1]}'"'"') # ip address
 
-# Prompt Block
+# Заранее определённые блоки командной строки
 timeC="${dimefct}[${dimefct}${timeshrt}${dimefct}]"
 userC="${dimefct}[${dimefct}${username}${dimefct}@${dimefct}${hostshrt}${dimefct}]${dimefct}>"
 gitbC="${txtpch}${gitfirst}"
@@ -76,6 +76,15 @@ function _prompt_command() {
     # Запускаем функцию для получения названия виртуального окружения и отображения в строке
     virtualenv_part=$(_virtualenv_prompt)
     PS1="$virtualenv_part${timeC}${userC} ${gitbC} ${wdirC}${newsline}${hisnC} ${crntC}${crdrC} ${strtC} ${txtend}"
+}
+
+function _virtualenv_prompt() {
+    if [[ $VIRTUAL_ENV != "" ]]
+    then
+        echo ${dimefct}"["${txtgre}"${VIRTUAL_ENV##*/}"${dimefct}"]"
+    else
+        echo ""
+    fi
 }
 
 PROMPT_COMMAND=_prompt_command
