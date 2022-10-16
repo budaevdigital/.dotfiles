@@ -10,7 +10,7 @@
 alias vpn='see_vpn_is_active'
 alias mnweb='mount_webdav'
 alias unweb='unmount_webdav'
-alias obsidian-backup="mount_webdav && zip_files $OBSIDIAN_ZIP $OBSIDIAN_DIR && backup_zip_file_on_mailcloud $OBSIDIAN_DIR $OBSIDIAN_ZIP $OBSIDIAN_BACKUP_DIR"
+alias obsidian-backup="mount_webdav && zip_files $OBSIDIAN_ZIP $OBSIDIAN_DIR && backup_zip_file_on_mailcloud $OBSIDIAN_DIR $OBSIDIAN_ZIP $OBSIDIAN_BACKUP_DIR && unmount_webdav"
 
 
 # Для быстрого запуска Flatpak приложений
@@ -80,10 +80,27 @@ function backup_zip_file_on_mailcloud() {
 }
 
 function unmount_webdav() {
-  # Размонтирование WebDAV
-  echo "Размонтирование $WEBDAV_URL";
-  sudo umount $WEBDAV_DIR;
-  cd ~;
+    sleep 5
+    counttry=0
+    while [ $counttry -lt 10 ]
+    do
+      echo "Размонтирование $WEBDAV_URL";
+      isunmount=$(sudo umount -f $WEBDAV_DIR | grep -c OK);
+      # Ведём подсчёт выведенных команд с "ОК"
+      # и просто сравниваем (если больше нуля)
+      if [ $isunmount -gt 0 ]; then
+        # После размонтирования, удаляем пустой каталог
+        echo "Удаление пустой директории $WEBDAV_URL";
+        sudo rm -r $WEBDAV_DIR;
+        cd ~;
+        break
+      else
+        echo "Размонтирование $WEBDAV_URL - Не выполненно!";
+        echo "Делаем попытку $counttry из 10 ..."
+        sleep 10
+      fi
+      counttry=$[ $counttry + 1 ]
+    done
 }
 
 # В первом аргументе передоётся имя файла "obsidian.zip"
