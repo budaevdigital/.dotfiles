@@ -66,7 +66,8 @@ sudo flatpak -y install md.obsidian.Obsidian
 sudo dnf -y install grub-customizer
 # Пакет для облачного гейминга
 sudo flatpak -y install flathub io.github.hmlendea.geforcenow-electron
-
+# Удобная тулза (по подобию Alfred Workflows на MacOS)
+sudo dnf install ulauncher
 
 echo "==============================================="
 echo "Дополнительная проверка обновлений"
