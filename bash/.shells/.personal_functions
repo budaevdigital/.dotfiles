@@ -11,17 +11,16 @@ alias vpn='see_vpn_is_active'
 alias mnweb='mount_webdav'
 alias unweb='unmount_webdav'
 alias obsidian-backup='mount_webdav && zip_files $OBSIDIAN_ZIP $OBSIDIAN_DIR && backup_zip_file_on_mailcloud $OBSIDIAN_DIR $OBSIDIAN_ZIP $OBSIDIAN_BACKUP_DIR && unmount_webdav'
-alias obsidian-git='sync_obsidian_git_dir && obsidian_git_push'
+alias obsidian-git='sync_obsidian_git_dir && directory_git_push $OBSIDIAN_GIT_DIR'
 
 # Для быстрого запуска Flatpak приложений
 # Работает только если пакет установлен через Flatpak
 
-# alias code='flatpak run com.visualstudio.code'
 alias postman='com.getpostman.Postman'
 alias wireshark='org.wireshark.Wireshark'
 alias telegram='org.telegram.desktop'
 # alias obsidian='md.obsidian.Obsidian'
-
+# alias code='flatpak run com.visualstudio.code'
 
 
 ############## FUNCTIONS OPTIONS ################
@@ -40,14 +39,15 @@ function sync_obsidian_git_dir() {
   fi
 }
 
-function obsidian_git_push() {
-  if [ -d "$OBSIDIAN_GIT_DIR" ]; then
-    CURRENT_DIR=$(pwd);
-    COMMIT_NAME=$(date +"%d.%m.%Y");
-    cd $OBSIDIAN_GIT_DIR
-    echo pwd
+function directory_git_push() {
+  DATE=$(date +"%d.%m.%Y");
+  DIRECTORY_FOR_GIT_PUSH=${1:-"."}
+  MESSAGE_FOR_GIT_PUSH=${2:-"Обновление за $DATE"}
+  if [ -d "$DIRECTORY_FOR_GIT_PUSH" ]; then
+    CURRENT_DIR=$(pwd); 
+    cd $DIRECTORY_FOR_GIT_PUSH
     git add .
-    git commit -m "Обновление статей за $COMMIT_NAME"
+    git commit -m "$MESSAGE_FOR_GIT_PUSH"
     git push
     cd $CURRENT_DIR
   fi
