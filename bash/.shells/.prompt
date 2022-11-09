@@ -1,29 +1,37 @@
 ############## PROMPT OPTIONS ################
-# 
-# Некоторые удобные параметры командной строки tput следующие
-# tput bold – Bold effect
-# tput rev – Display inverse colors
-# tput sgr0 – Reset everything
-# tput setaf {CODE} – Set foreground color, see color {CODE} table below for more information
-# tput setab {CODE} – Set background color, see color {CODE} table below for more information
-# 
-# 0 – Black; 1 – Red; 2 – Green; 3 – Yellow; 4 – Blue; 5 – Magenta; 6 – Cyan; 7 – White
-# 
-# Example: LightGreyBG="$(tput setab 7)"
 
 # Эффекты
 dimefct='\[\e[0;2m\]' # Standart - Muted
 blinfct='\[\e[0;5m\]' # Blink
 
 # Цвета
+# Пояснения:
+# \[\e[0;A;38or48;255;255m\]
+# 255;255 = номер цвета
+# 38 or 48 (в зависимости от цвета, может и не быть):
+#  38 = foreground color
+#  48 = background color
+# A - Это эффект (идёт после '0' может и не быть):
+#  1 = Жирный текст
+#  2 = Приглушённый текст
+#  3 = Курсив
+#  4 = Подчеркнутый
+#  5 = Мигающий
+#  53 = Черта над текстом
+#  7 = Инверсия цвета
 txtgre='\[\e[0;38;5;115m\]' # LightGreen
 txtpch='\[\e[0;1;38;5;210m\]' # Peach - Bold
 txtvio='\[\e[0;2;38;5;98m\]' # Dark Violet - Muted
 txteme='\[\e[0;38;5;37m\]' # Emerald
 txttox='\[\e[0;38;5;41m\]' # Toxic
-txtcre='\[\e[0;1;2;97m\]' #  Cream - Bold
+txtcre='\[\e[0;1;38;2;97m\]' #  Cream - Bold
 txtpic='\[\e[0;1;38;5;205m\]' # Pink - Bold
 txtend='\[\e[0;38;5;255m\]' # Best White
+
+# Фон
+bgcolor_turq_history='\[\e[0;38;5;60;48;5;37m\]'  # Turquoise (Бирюзовый) background color
+bgcolor_turq='\[\e[0;2;38;5;53;48;5;37m\]'  # Turquoise (Бирюзовый) background color
+color_turq='\[\e[0;38;5;37m\]'    # Turquoise (Бирюзовый) foreground color
 
 # Prompt Элементы
 histnumb='\!' # Показывает номер команды в истории
@@ -35,10 +43,17 @@ timeshrt='\A' # Время без секунд
 username='\u'
 hostshrt='\h' # Хостнейм без .
 workdirc='\w' # Список всех директорий
-newsline='\n' # Новая строка
+newline='\n' # Новая строка
 poin1prt='▶'
 poin2prt='➜' 
 curntdir='\W' # Показывает текущюю директорию
+solidtreerh=''  #solidtreerh
+solidtreelh=''
+treerh='' # >
+spaces=' '
+modifygitfiles='' # в виде иконки пламени
+iconfire=''
+
 
 # Other Prompt Elements
 # \v # bash version
@@ -55,11 +70,19 @@ timeC="${dimefct}[${dimefct}${timeshrt}${dimefct}]"
 userC="${dimefct}[${dimefct}${username}${dimefct}@${dimefct}${hostshrt}${dimefct}]${dimefct}>"
 gitbC="${txtpch}${gitfirst}"
 wdirC="${txteme}${workdirc}"
+pontC="${dimefct}${poin2prt}"
 hisnC="${txtvio}${histnumb}"
 crntC="${dimefct}.${dimefct}/"
 crdrC="${txtcre}${curntdir}"
-pontC="${dimefct}${poin2prt}"
 strtC="${txttox}${poin2prt}"
+
+BKgrspace="${bgcolor_turq}${spaces}" # Пустой пробел с окрашенным фоном
+
+bkghisnC="${bgcolor_turq_history}${histnumb}"
+bkgcrntC="${bgcolor_turq_history}.${bgcolor_turq_history}/"
+bkgcrdrC="${bgcolor_turq}${curntdir}"
+bkgstrtC="${color_turq}${solidtreerh}"
+bkgendstrC="${color_turq}${treerh}"
 
 # Красный цвет пользователя для root
 if [ "${UID}" -eq "0" ]; then 
@@ -75,7 +98,10 @@ export PROMPT_DIRTRIM=5
 function _prompt_command() {
     # Запускаем функцию для получения названия виртуального окружения и отображения в строке
     virtualenv_part=$(_virtualenv_prompt)
-    PS1="$virtualenv_part${timeC}${userC} ${gitbC} ${wdirC}${newsline}${hisnC} ${crntC}${crdrC} ${strtC} ${txtend}"
+    addgitfiles=$(_is_modify_git_files)
+    first_line="$virtualenv_part${timeC}${userC} ${gitbC} ${addgitfiles} ${wdirC}${newline}"
+    second_line="${bkghisnC}${BKgrspace}${bkgcrntC}${bkgcrdrC}${BKgrspace}${bkgstrtC}${bkgendstrC} ${txtend}"
+    PS1="${first_line}${second_line}"
 }
 
 function _virtualenv_prompt() {
@@ -85,6 +111,19 @@ function _virtualenv_prompt() {
     else
         echo ""
     fi
+}
+
+function _is_modify_git_files() {
+    # Выводит 1 если есть совпадения (-с)
+    # Не выводит ошибки (аргумент -s)
+    value=$(git status 2>/dev/null | grep -cs "Changes not staged")  
+    if [ $value -eq 1 ]
+    then
+        echo ${txtpch}${modifygitfiles}
+    else
+        echo ""
+    fi
+
 }
 
 PROMPT_COMMAND=_prompt_command
