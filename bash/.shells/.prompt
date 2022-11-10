@@ -32,6 +32,8 @@ txtend='\[\e[0;38;5;255m\]' # Best White
 bgcolor_turq_history='\[\e[0;38;5;60;48;5;37m\]'  # Turquoise (Бирюзовый) background color
 bgcolor_turq='\[\e[0;2;38;5;53;48;5;37m\]'  # Turquoise (Бирюзовый) background color
 color_turq='\[\e[0;38;5;37m\]'    # Turquoise (Бирюзовый) foreground color
+color_turq='\[\e[0;38;5;37m\]'    # Turquoise (Бирюзовый) foreground color
+
 
 # Prompt Элементы
 histnumb='\!' # Показывает номер команды в истории
@@ -53,7 +55,12 @@ treerh='' # >
 spaces=' '
 modifygitfiles='' # в виде иконки пламени
 iconfire=''
-
+startlineicon=''
+startlineicon2=''
+startlineicon3=''
+startlineicon4=''
+startlineicon5=''
+startlineicon6=''
 
 # Other Prompt Elements
 # \v # bash version
@@ -84,6 +91,8 @@ bkgcrdrC="${bgcolor_turq}${curntdir}"
 bkgstrtC="${color_turq}${solidtreerh}"
 bkgendstrC="${color_turq}${treerh}"
 
+FTline="${color_turq}${startlineicon}"
+
 # Красный цвет пользователя для root
 if [ "${UID}" -eq "0" ]; then 
   userC="${dimefct}[${txtpic}${username}${dimefct}]${dimefct}>"
@@ -100,7 +109,7 @@ function _prompt_command() {
     virtualenv_part=$(_virtualenv_prompt)
     addgitfiles=$(_is_modify_git_files)
     first_line="$virtualenv_part${timeC}${userC} ${gitbC} ${addgitfiles} ${wdirC}${newline}"
-    second_line="${bkghisnC}${BKgrspace}${bkgcrntC}${bkgcrdrC}${BKgrspace}${bkgstrtC}${bkgendstrC} ${txtend}"
+    second_line="${BKgrspace}${bkghisnC}${BKgrspace}${bkgcrntC}${bkgcrdrC}${BKgrspace}${bkgstrtC}${bkgendstrC} ${txtend}"
     PS1="${first_line}${second_line}"
 }
 
