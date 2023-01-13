@@ -3,6 +3,8 @@ set -e
 
 MY_HOSTNAME=tools
 
+
+# Актуальность: 05.2022
 # Предварительно установить - https://flathub.org/repo/flathub.flatpakrepo
 # Для настройки Flat менеджера пакетов
 
@@ -60,6 +62,8 @@ sudo dnf -y install code
 
 # Установка терминала
 sudo dnf -y install terminator
+# Установка tmux (мультиплексор терминалов)
+sudo dnf install tmux
 # Пакет для ведения заметок
 sudo flatpak -y install md.obsidian.Obsidian
 # Пакет для настройки Grub при загрузки системы
