@@ -1,0 +1,68 @@
+# Используемые шрифты
+font:
+  normal:
+    family: Liberation Mono
+    style: Regular
+
+  bold:
+    family: Liberation Mono
+    style: Bold
+
+  italic:
+    family: Liberation Mono
+    style: Italic
+
+  bold_italic:
+    family: Liberation Mono
+    style: Bold Italic
+
+  size: 12
+
+colors:
+  # Цвета по-умолчанию
+  primary:
+    background: '#333333'
+    foreground: '#c0c0c0'
+
+    dim_foreground:    '#dbdbdb'
+    bright_foreground: '#d9d9d9'
+    dim_background:    '#202020'
+    bright_background: '#3a3a3a'
+
+  # Цвета курсора
+  cursor:
+    text:   '#2c2c2c'
+    cursor: '#d9d9d9'
+
+  # Обычные цвета
+  normal:
+    black:   '#000000'
+    red:     '#c430c9'
+    green:   '#24f0a5'
+    yellow:  '#d341d8'
+    blue:    '#4155d8'
+    magenta: '#f02443'
+    cyan:    '#27b577'
+    white:   '#cacaca'
+
+  # Осветлённые
+  bright:
+    black:   '#000000'
+    red:     '#c430c9'
+    green:   '#24f0a5'
+    yellow:  '#d341d8'
+    blue:    '#4155d8'
+    magenta: '#f02443'
+    cyan:    '#27b577'
+    white:   '#cacaca'
+
+  # Затемненные (тусклые)
+  dim:
+    black:   '#000000'
+    red:     '#613583'
+    green:   '#24f0a5'
+    yellow:  '#d341d8'
+    blue:    '#4155d8'
+    magenta: '#f02443'
+    cyan:    '#27b577'
+    white:   '#cacaca'
