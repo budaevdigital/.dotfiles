@@ -47,11 +47,16 @@ fi
 
 if [[ $CONFIGTERMINAL == "y" || $CONFIGTERMINAL == "Y3" || $CONFIGTERMINAL == "" ]]; then
   if [[ -f ~/.config/terminator/config ]]; then
-    cp -f cp $DOT_DIR_FILE_HOME/terminator/config ~/.config/terminator/config
+    cp -f $DOT_DIR_FILE_HOME/terminator/config ~/.config/terminator/config
   fi
   cp $DOT_DIR_FILE_HOME/terminator ~/.config/terminator/
+
+  if [[ -f ~/.config/alacritty/alacritty.yml ]]; then
+    cp -f $DOT_DIR_FILE_HOME/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+  fi
+  cp $DOT_DIR_FILE_HOME/alacritty ~/.config/alacritty/
 else
-    echo 'Конфиг для terminator пропущен'
+    echo 'Конфиги пропущены'
 fi
 
 if [[ $REMOTHERFILES == "y" || $REMOTHERFILES == "Y4" || $REMOTHERFILES == "" ]]; then    
