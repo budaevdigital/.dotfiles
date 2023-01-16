@@ -1,38 +1,128 @@
-# Используемые шрифты
+# Shell
+#
+# Вы можете указать для `shell.program` путь к вашей любимой оболочке, например `/bin/zsh`.
+# Записи в `shell.args` передаются оболочке без изменений в качестве аргументов.
+#
+# Default:
+#   - (macOS) /bin/bash --login
+#   - (Linux) user login shell
+#   - (Windows) powershell
+# shell:
+# program: /usr/bin/zsh
+#  args:
+#    - --login
+# shell:
+#   program: /bin/zsh
+#   args:
+#     - -l
+#     - -c
+#     - "tmux"
+
+window:
+  # Заполнение окна (изменения требуют перезагрузки)
+  #
+  # Вокруг окна добавлено пустое пространство в пикселях. Это дополнение масштабируется
+  # по DPI, и указанное значение всегда добавляется на обеих противоположных сторонах
+  padding:
+    x: 0
+    y: 0
+
+  # Равномерно распределите дополнительные отступы вокруг содержимого терминала
+  dynamic_padding: true
+
+  # Декорации
+  #
+  # Значения для `decorations`:
+  #     - full: границы и строка заголовка
+  #     - none: ни границ, ни строки заголовка
+  #
+  # Значения `decorations` (macOS only):
+  #     - transparent: строка заголовка, прозрачный фон и кнопки строки заголовка
+  #     - buttonless: строка заголовка, прозрачный фон, но без кнопок строки заголовка
+  decorations: full
+
+  # Startup Mode (изменения требуют перезагрузки)
+  #
+  # Значения для `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Значения `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: Windowed
+
+scrolling:
+  # Максимальное количество строк в буфере прокрутки.
+  # Значение '0' отключит прокрутку
+  history: 1000
+
+  # Количество строк, на которые будет перемещаться окно просмотра для каждой строки, прокручиваемой при
+  # При условии, что прокрутна включени (history > 0)
+  multiplier: 3
+
+
+# Настройки шрифта (изменения требуют перезагрузки)
 font:
   normal:
-    family: Liberation Mono
+    family: 'Liberation Mono'
     style: Regular
 
   bold:
-    family: Liberation Mono
+    family: 'Liberation Mono'
     style: Bold
 
   italic:
-    family: Liberation Mono
+    family: 'Liberation Mono'
     style: Italic
 
   bold_italic:
-    family: Liberation Mono
+    family: 'Liberation Mono'
     style: Bold Italic
 
-  size: 12
+  size: 12.0
 
+  # Смещение — это дополнительное пространство вокруг каждого символа. `offset.y` можно представить
+  # для изменения межстрочного интервала и `offset.x` для изменения межбуквенного интервала
+  offset:
+    x: 0
+    y: 0
+
+  # Смещение символов определяет расположение в их ячейках
+  # Увеличение «x» перемещает символ вправо,
+  # увеличение `y` перемещает символ вверх
+  glyph_offset:
+    x: 0
+    y: 0
+
+  # Отрисовка шрифта с тонким штрихом (только для macOS)
+  #
+  # Тонкие штрихи подходят для дисплеев Retina, но для экранов без Retina
+  # рекомендуется установить для `use_thin_strokes` значение `false`
+  #
+  # macOS >= 10.14.x:
+  #
+  # Если качество шрифта на дисплее без Retina выглядит плохо, установите
+  # `use_thin_strokes` в `true` и включите сглаживание шрифта, запустив команду:
+  # `default write -g CGFontRenderingFontSmoothingDisabled -bool NO`
+  #
+  # Это глобальная настройка, для ее использования потребуется выйти из системы или перезапуститься
+  # use_thin_strokes: false
+
+# Если `true`, жирный текст рисуется с использованием вариантов яркого цвета.
+draw_bold_text_with_bright_colors: true
+
+# Настройки цветов
 colors:
   # Цвета по-умолчанию
   primary:
-    background: '#333333'
+    hard contrast: background = '#202020'
+    background: '#292929'
+    soft contrast: background = '#3a3a3a'
+
+    hard contrast: foreground = '#dbdbdb'
     foreground: '#c0c0c0'
-
-    dim_foreground:    '#dbdbdb'
-    bright_foreground: '#d9d9d9'
-    dim_background:    '#202020'
-    bright_background: '#3a3a3a'
-
-  # Цвета курсора
-  cursor:
-    text:   '#2c2c2c'
-    cursor: '#d9d9d9'
+    soft contrast: foreground = '#d9d9d9'
 
   # Обычные цвета
   normal:
@@ -66,3 +156,191 @@ colors:
     magenta: '#f02443'
     cyan:    '#27b577'
     white:   '#cacaca'
+
+  # Цвета курсора
+  cursor:
+    text:   '#2c2c2c'
+    cursor: '#d9d9d9'
+
+mouse:
+  # Настройки `double_click` и `triple_click` с настройкой времени 
+  # alacritty должен ждёт принятия нескольких кликов как одного двойного
+  # или тройной клик за заданное кол-во времени
+  # double_click: { threshold: 300 }
+  # triple_click: { threshold: 300 }
+
+  # Если это `true`, курсор временно скрывается при наборе текста
+  hide_when_typing: false
+
+selection:
+  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
+
+  # Если установлено значение «true», выделенный текст будет скопирован в основной буфер обмена.
+  save_to_clipboard: true
+
+cursor:
+  # Настройки курсора
+  #
+  # Значения для `style`:
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
+
+  # Если это `true`, курсор будет отображаться как пустой прямоугольник, когда
+  # окно не в фокусе
+  unfocused_hollow: true
+
+# Применяет конфиг сразу после изменения (изменения требуют перезагрузки)
+live_config_reload: true
+
+
+# Директория запуска
+#
+# Каталог, в котором запускается оболочка. Если он не установлен или `None`
+# будет использоваться каталог родительского процесса
+working_directory: None
+
+# Отправлять ESC (\x1b) перед символами при нажатии alt.
+alt_send_esc: true
+
+debug:
+  # Отображение времени, необходимого для перерисовки каждого кадра.
+  render_timer: false
+
+  # Сохранять log файл после выхода из Alacritty.
+  persistent_logging: false
+
+  # Логгирование
+  #
+  # Значения для `log_level`:
+  #   - None
+  #   - Error
+  #   - Warn
+  #   - Info
+  #   - Debug
+  #   - Trace
+  log_level: Warn
+
+  # Распечатать все полученные события окна.
+  print_events: false
+
+  # Запишите все символы и escape-последовательности в качестве тестовых данных.
+  ref_test: false
+
+# Настройки быстрых клавиш
+#
+# Привязки клавиш указаны в виде списка объектов. Каждая привязка будет указывать
+# ключ и модификаторы, необходимые для его срабатывания, режимы терминала, где привязка
+# применимо, и что следует делать, когда срабатывает привязка клавиш. Это может либо
+# отправить последовательность байтов работающему приложению (`chars`), выполнить
+# предопределенное действие (`action`) или разветвление и выполнение указанной команды плюс
+# аргументы (`command`)
+#
+# Привязки всегда заполнены по умолчанию, но будут заменены при появлении новой привязки.
+# с теми же триггерами. Чтобы отменить привязку по умолчанию, можно
+# переопределить действия с `None`.
+#
+# Пример:
+#   `- { key: V, mods: Control|Shift, action: Paste }`
+#
+# Доступные поля:
+#   - key
+#   - mods (optional)
+#   - chars | action | command (exactly one required)
+#   - mode (optional)
+#
+# Значения для `key`:
+#   - `A` -> `Z`
+#   - `F1` -> `F12`
+#   - `Key1` -> `Key0`
+#
+# Список со всем доступными ключами можно найти здесь:
+# https://docs.rs/glutin/0.17.0/glutin/enum.VirtualKeyCode.html
+#
+# Вместо использования имени ключей поле `key` также поддерживает использование
+# скан-код нужной клавиши. Сканкоды должны быть указаны как десятичное число
+# Эта команда позволит вам отображать шестнадцатеричные скан-коды для определенных клавиш:
+# `showkey --scancodes`
+#
+# Значения для `mods`:
+#   - Command
+#   - Control
+#   - Option
+#   - Super
+#   - Shift
+#   - Alt
+#
+# Несколько `модов` можно комбинировать с помощью `|` следующим образом: `mods: Control|Shift`.
+# Пробелы и заглавные буквы важны и должны соответствовать примеру.
+#
+# Значения для `chars`:
+#   Поле `chars` записывает указанную строку в терминал. Это делает
+#   возможным передавать управляющие последовательности.
+#   Чтобы найти escape-коды для таких привязок, как `PageUp` ("\x1b[5~"), вы можете запустить
+#   команду `showkey -a` вне tmux
+#   Обратите внимание, что приложения используют terminfo для сопоставления escape-последовательностей с
+#   ключами. Поэтому требуется обновить terminfo, когда изменяется управляющая последовательность
+#
+# Значения для `action`:
+#   - Paste
+#   - PasteSelection
+#   - Copy
+#   - IncreaseFontSize
+#   - DecreaseFontSize
+#   - ResetFontSize
+#   - ScrollPageUp
+#   - ScrollPageDown
+#   - ScrollLineUp
+#   - ScrollLineDown
+#   - ScrollToTop
+#   - ScrollToBottom
+#   - ClearHistory
+#   - Hide
+#   - Quit
+#   - ClearLogNotice
+#   - SpawnNewInstance
+#   - ToggleFullscreen
+#   - None
+#
+# Значение `action` (macOS only):
+#   - ToggleSimpleFullscreen: Входит в полноэкранный режим, не занимая другое пространство
+#
+# Значение для `command`:
+#   Поле `command` должно быть ассоциативным массивом(ключ:значение),
+#   содержащей строку `program` и массив `args` для параметров командной строки
+#
+#   Пример:
+#       `command: { program: "alacritty", args: ["-e", "vttest"] }`
+#
+# Values for `mode`:
+#   - ~AppCursor
+#   - AppCursor
+#   - ~AppKeypad
+#   - AppKeypad
+
+# key_bindings:
+  # (Windows/Linux only)
+  # - { key: V,        mods: Control|Shift, action: Paste            }
+  # - { key: C,        mods: Control|Shift, action: Copy             }
+  # - { key: Insert,   mods: Shift,         action: PasteSelection   }
+  # - { key: Key0,     mods: Control,       action: ResetFontSize    }
+  # - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  # - { key: Add,      mods: Control,       action: IncreaseFontSize }
+  # - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  # - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  # - { key: Return,   mods: Alt,           action: ToggleFullscreen }
+
+  # (macOS only)
+  #- { key: Key0,   mods: Command,         action: ResetFontSize    }
+  #- { key: Equals, mods: Command,         action: IncreaseFontSize }
+  #- { key: Add,    mods: Command,         action: IncreaseFontSize }
+  #- { key: Minus,  mods: Command,         action: DecreaseFontSize }
+  #- { key: K,      mods: Command,         action: ClearHistory     }
+  #- { key: K,      mods: Command,         chars: "\x0c"            }
+  #- { key: V,      mods: Command,         action: Paste            }
+  #- { key: C,      mods: Command,         action: Copy             }
+  #- { key: H,      mods: Command,         action: Hide             }
+  #- { key: Q,      mods: Command,         action: Quit             }
+  #- { key: W,      mods: Command,         action: Quit             }
+  #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
