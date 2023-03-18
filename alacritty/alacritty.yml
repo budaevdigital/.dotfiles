@@ -11,12 +11,13 @@
 # program: /usr/bin/zsh
 #  args:
 #    - --login
-# shell:
-#   program: /bin/zsh
-#   args:
-#     - -l
-#     - -c
-#     - "tmux"
+shell:
+  program: /usr/bin/zsh
+# Аргументы для автозапуска сессии tmux
+#  args:
+#    - -l
+#    - -c
+#    - "tmux"
 
 window:
   # Заполнение окна (изменения требуют перезагрузки)
