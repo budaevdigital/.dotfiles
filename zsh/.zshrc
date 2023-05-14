@@ -126,8 +126,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias c="clear"
-alias pycharm="pycharm-community"
-
+alias pycharm="/usr/local/bin/pycharm/bin/pycharm.sh > /dev/null 2>&1"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
