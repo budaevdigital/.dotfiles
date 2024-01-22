@@ -1,0 +1,15 @@
+
+
+alias lc_tmux='learn_commands ${HOME}/.commands/tmux'
+alias lc_search='learn_commands ${HOME}/.commands/search'
+
+
+# $1 - путь к файлу
+# $2 - команда для поиска
+function learn_commands() {
+    if [ -z "$2" ]; then
+        sed -n "s/^##//p" $1 | column -t -s ":" |  sed -e "s/^/ >/";
+    else
+		sed -n "s/^##//p" $1 | column -t -s ":" |  sed -e "s/^/ >/" | grep $2 --color;
+    fi
+}
