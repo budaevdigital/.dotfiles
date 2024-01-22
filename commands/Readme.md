@@ -14,3 +14,6 @@ mv commands/* ~/.commands/
 echo 'source ${HOME}/.commands/init_commands' >> ${HOME}/.zshrc
 ```
 
+## Обновление репозитория после добавления команд
+
+cp * ~/.dotfiles/commands
