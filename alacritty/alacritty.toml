@@ -1,0 +1,103 @@
+live_config_reload = true
+working_directory = "None"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "#000000"
+blue = "#4155d8"
+cyan = "#27b577"
+green = "#24f0a5"
+magenta = "#f02443"
+red = "#c430c9"
+white = "#cacaca"
+yellow = "#d341d8"
+
+[colors.cursor]
+cursor = "#d9d9d9"
+text = "#2c2c2c"
+
+[colors.dim]
+black = "#000000"
+blue = "#4155d8"
+cyan = "#27b577"
+green = "#24f0a5"
+magenta = "#f02443"
+red = "#613583"
+white = "#cacaca"
+yellow = "#d341d8"
+
+[colors.normal]
+black = "#000000"
+blue = "#4155d8"
+cyan = "#27b577"
+green = "#24f0a5"
+magenta = "#f02443"
+red = "#c430c9"
+white = "#cacaca"
+yellow = "#d341d8"
+
+[colors.primary]
+background = "#202020"
+foreground = "#dbdbdb"
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[debug]
+log_level = "Warn"
+persistent_logging = false
+print_events = false
+render_timer = false
+
+[font]
+size = 12.0
+
+[font.bold]
+family = "Liberation Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Liberation Mono"
+style = "Bold Italic"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "Liberation Mono"
+style = "Italic"
+
+[font.normal]
+family = "Liberation Mono"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[mouse]
+hide_when_typing = false
+
+[scrolling]
+history = 1000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[shell]
+program = "/usr/bin/zsh"
+
+[window]
+decorations = "full"
+dynamic_padding = true
+startup_mode = "Windowed"
+
+[window.padding]
+x = 0
+y = 0

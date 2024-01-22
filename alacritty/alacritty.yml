@@ -117,13 +117,8 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Цвета по-умолчанию
   primary:
-    hard contrast: background = '#202020'
-    background: '#292929'
-    soft contrast: background = '#3a3a3a'
-
-    hard contrast: foreground = '#dbdbdb'
-    foreground: '#c0c0c0'
-    soft contrast: foreground = '#d9d9d9'
+    background: '#202020'
+    foreground: '#dbdbdb'
 
   # Обычные цвета
   normal:
@@ -202,8 +197,9 @@ live_config_reload: true
 # будет использоваться каталог родительского процесса
 working_directory: None
 
-# Отправлять ESC (\x1b) перед символами при нажатии alt.
-alt_send_esc: true
+# Отправлять ESC (\x1b) перед символами при нажатии alt
+# For MacOs only
+#window.option_as_alt: true
 
 debug:
   # Отображение времени, необходимого для перерисовки каждого кадра.
@@ -227,7 +223,7 @@ debug:
   print_events: false
 
   # Запишите все символы и escape-последовательности в качестве тестовых данных.
-  ref_test: false
+  #ref_test: false
 
 # Настройки быстрых клавиш
 #
