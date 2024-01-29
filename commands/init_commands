@@ -2,6 +2,8 @@
 
 alias lc_tmux='learn_commands ${HOME}/.commands/tmux'
 alias lc_search='learn_commands ${HOME}/.commands/search'
+alias lc_trouble='learn_commands ${HOME}/.commands/trouble'
+
 
 
 # $1 - путь к файлу
